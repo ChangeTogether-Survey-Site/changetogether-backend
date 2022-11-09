@@ -14,7 +14,9 @@
                     <input type="text" class="form-control"
                     id="nameTextField"
                     placeholder="Enter the Book Title"
-                    name="name" required>
+                    name="name" 
+                    value="<%= survey.name %>"
+                    required>
                 </div>
 
                 <div class="form-group">
@@ -22,7 +24,9 @@
                     <input type="text" class="form-control"
                     id="authorTextField"
                     placeholder="Enter the Book's Author"
-                    name="author" required>
+                    name="author" 
+                    value="<%= survey.author %>"
+                    required>
                 </div>
 
                 <div class="form-group">
@@ -30,7 +34,9 @@
                     <input type="text" class="form-control"
                     id="publishedTextField"
                     placeholder="Enter the Year of Publication"
-                    name="published" required>
+                    name="published" 
+                    value="<%= survey.published %>"
+                    required>
                 </div>
 
                 <div class="form-group">
@@ -38,7 +44,10 @@
                     <textarea type="text" class="form-control"
                     id="descriptionTextArea"
                     placeholder="Enter the a brief description of the book"
-                    name="description" required></textarea>
+                    name="description" 
+                    required>
+                    <%= survey.description %>
+                    </textarea>
                 </div>
 
                 <div class="form-group">
@@ -46,13 +55,15 @@
                     <input type="text" class="form-control"
                     id="priceTextField"
                     placeholder="Enter the Book's Price"
-                    name="price" required>
+                    name="price" 
+                    value="<%= survey.price %>"
+                    required>
                 </div>
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-edit"></i> Submit</button>
                 
-                    <a href="/book-list" class="btn btn-warning">
+                    <a href="/survey-list" class="btn btn-warning">
                         <i class="fas fa-undo"></i> Cancel</a>
 
             </form>
@@ -60,7 +71,6 @@
 
     </div>
 </div>
-
 
 
 <%- include ../partials/bottom_nav.ejs %>  

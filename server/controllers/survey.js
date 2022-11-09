@@ -5,10 +5,10 @@ let mongoose = require('mongoose');
 let jwt = require('jsonwebtoken');
 
 // create a reference to the model
-let Book = require('../models/book');
+let Survey = require('../models/survey');
 
-module.exports.displayBookList = (req, res, next) => {
-    Book.find((err, bookList) => {
+module.exports.displaySurveyList = (req, res, next) => {
+    Survey.find((err, surveyList) => {
         if(err)
         {
             return console.error(err);
@@ -17,21 +17,21 @@ module.exports.displayBookList = (req, res, next) => {
         {
             //console.log(BookList);
 
-            res.render('book/list', 
-            {title: 'Books', 
-            BookList: bookList, 
+            res.render('survey/list', 
+            {title: 'Surveys', 
+            SurveyList: surveyList, 
             displayName: req.user ? req.user.displayName : ''});      
         }
     });
 }
 
 module.exports.displayAddPage = (req, res, next) => {
-    res.render('book/add', {title: 'Add Book', 
+    res.render('survey/add', {title: 'Add Survey', 
     displayName: req.user ? req.user.displayName : ''})          
 }
 
 module.exports.processAddPage = (req, res, next) => {
-    let newBook = Book({
+    let newSurvey = Survey({
         "name": req.body.name,
         "author": req.body.author,
         "published": req.body.published,
@@ -39,7 +39,7 @@ module.exports.processAddPage = (req, res, next) => {
         "price": req.body.price
     });
 
-    Book.create(newBook, (err, Book) =>{
+    Survey.create(newSurvey, (err, Survey) =>{
         if(err)
         {
             console.log(err);
@@ -48,7 +48,7 @@ module.exports.processAddPage = (req, res, next) => {
         else
         {
             // refresh the book list
-            res.redirect('/book-list');
+            res.redirect('/survey-list');
         }
     });
 
@@ -57,7 +57,7 @@ module.exports.processAddPage = (req, res, next) => {
 module.exports.displayEditPage = (req, res, next) => {
     let id = req.params.id;
 
-    Book.findById(id, (err, bookToEdit) => {
+    Survey.findById(id, (err, surveyToEdit) => {
         if(err)
         {
             console.log(err);
@@ -66,7 +66,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('book/edit', {title: 'Edit Book', book: bookToEdit, 
+            res.render('survey/edit', {title: 'Edit Survey', survey: surveyToEdit, 
             displayName: req.user ? req.user.displayName : ''})
         }
     });
@@ -75,7 +75,7 @@ module.exports.displayEditPage = (req, res, next) => {
 module.exports.processEditPage = (req, res, next) => {
     let id = req.params.id
 
-    let updatedBook = Book({
+    let updatedSurvey = Survey({
         "_id": id,
         "name": req.body.name,
         "author": req.body.author,
@@ -84,7 +84,7 @@ module.exports.processEditPage = (req, res, next) => {
         "price": req.body.price
     });
 
-    Book.updateOne({_id: id}, updatedBook, (err) => {
+    Survey.updateOne({_id: id}, updatedSurvey, (err) => {
         if(err)
         {
             console.log(err);
@@ -93,7 +93,7 @@ module.exports.processEditPage = (req, res, next) => {
         else
         {
             // refresh the book list
-            res.redirect('/book-list');
+            res.redirect('/survey-list');
         }
     });
 }
@@ -101,7 +101,7 @@ module.exports.processEditPage = (req, res, next) => {
 module.exports.performDelete = (req, res, next) => {
     let id = req.params.id;
 
-    Book.remove({_id: id}, (err) => {
+    Survey.remove({_id: id}, (err) => {
         if(err)
         {
             console.log(err);
@@ -110,7 +110,7 @@ module.exports.performDelete = (req, res, next) => {
         else
         {
              // refresh the book list
-             res.redirect('/book-list');
+             res.redirect('/survey-list');
         }
     });
 }
