@@ -32,11 +32,10 @@ module.exports.displayAddPage = (req, res, next) => {
 
 module.exports.processAddPage = (req, res, next) => {
     let newSurvey = Survey({
-        "name": req.body.name,
         "author": req.body.author,
-        "published": req.body.published,
+        "surveyTitle": req.body.surveyTitle,
         "description": req.body.description,
-        "price": req.body.price
+        "questions": req.body.questions
     });
 
     Survey.create(newSurvey, (err, Survey) =>{
@@ -77,11 +76,10 @@ module.exports.processEditPage = (req, res, next) => {
 
     let updatedSurvey = Survey({
         "_id": id,
-        "name": req.body.name,
         "author": req.body.author,
-        "published": req.body.published,
+        "surveyTitle": req.body.surveyTitle,
         "description": req.body.description,
-        "price": req.body.price
+        "questions": req.body.questions
     });
 
     Survey.updateOne({_id: id}, updatedSurvey, (err) => {

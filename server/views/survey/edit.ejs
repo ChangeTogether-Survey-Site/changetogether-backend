@@ -14,8 +14,18 @@
                     <input type="text" class="form-control"
                     id="nameTextField"
                     placeholder="Enter the Book Title"
-                    name="name" 
-                    value="<%= survey.name %>"
+                    name="author" 
+                    value="<%= survey.author %>"
+                    required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nameTextField">Book Title</label>
+                    <input type="text" class="form-control"
+                    id="nameTextField"
+                    placeholder="Enter the Book Title"
+                    name="surveyTitle" 
+                    value="<%= survey.surveyTitle %>"
                     required>
                 </div>
 
@@ -24,8 +34,8 @@
                     <input type="text" class="form-control"
                     id="authorTextField"
                     placeholder="Enter the Book's Author"
-                    name="author" 
-                    value="<%= survey.author %>"
+                    name="description" 
+                    value="<%= survey.description %>"
                     required>
                 </div>
 
@@ -34,31 +44,12 @@
                     <input type="text" class="form-control"
                     id="publishedTextField"
                     placeholder="Enter the Year of Publication"
-                    name="published" 
-                    value="<%= survey.published %>"
+                    name="questions" 
+                    value="<%= survey.questions %>"
                     required>
                 </div>
 
-                <div class="form-group">
-                    <label for="descriptionTextArea">Description</label>
-                    <textarea type="text" class="form-control"
-                    id="descriptionTextArea"
-                    placeholder="Enter the a brief description of the book"
-                    name="description" 
-                    required>
-                    <%= survey.description %>
-                    </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="priceTextField">Price</label>
-                    <input type="text" class="form-control"
-                    id="priceTextField"
-                    placeholder="Enter the Book's Price"
-                    name="price" 
-                    value="<%= survey.price %>"
-                    required>
-                </div>
+               
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-edit"></i> Submit</button>
