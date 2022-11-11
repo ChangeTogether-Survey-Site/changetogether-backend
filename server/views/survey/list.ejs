@@ -19,17 +19,17 @@
                 <!-- Header Row-->
                 <tr class="d-flex">
                     <% if(typeof displayName == 'string' && displayName) { %>
-                        <th class="text-center col-2">Author</th>
-                        <th class="text-center col-2">Title</th>
+                        <th class="text-center col-2">Survey Name</th>
                         <th class="text-center col-2">Description</th>
+                        <th class="text-center col-2">Organization</th>
                         <th class="text-center col-2">Questions</th>
                     
                         <th class="text-center col-4"></th>
                        
                     <% } else { %>
-                        <th class="text-center col-2">Author</th>
-                        <th class="text-center col-2">Title</th>
+                        <th class="text-center col-2">Survey Name</th>
                         <th class="text-center col-2">Description</th>
+                        <th class="text-center col-2">Organization</th>
                         <th class="text-center col-2">Questions</th>
                        
                     <% } %>
@@ -40,9 +40,9 @@
                 <% for(let count = 0; count < SurveyList.length; count++) { %>
                     <tr class="d-flex">
                         <% if(typeof displayName == 'string' && displayName) { %>
-                            <td class="text-center col-2"><%= SurveyList[count].author %></td>
-                            <td class="text-center col-2"><%= SurveyList[count].surveyTitle %></td>
+                            <td class="text-center col-2"><%= SurveyList[count].surveyName %></td>
                             <td class="text-center col-2"><%= SurveyList[count].description %></td>
+                            <td class="text-center col-2"><%= SurveyList[count].organization %></td>
                             <td class="text-center col-2"><%= SurveyList[count].questions %></td>          
                             <td class="text-center col-2">
                                 <a href="/survey-list/edit/<%= SurveyList[count]._id %>" class="btn btn-primary btn-sm">

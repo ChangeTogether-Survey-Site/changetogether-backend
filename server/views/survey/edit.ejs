@@ -9,23 +9,14 @@
             <h1><%= title %></h1>
 
             <form class="form" method="POST">
-                <div class="form-group">
-                    <label for="nameTextField">Book Title</label>
-                    <input type="text" class="form-control"
-                    id="nameTextField"
-                    placeholder="Enter the Book Title"
-                    name="author" 
-                    value="<%= survey.author %>"
-                    required>
-                </div>
 
                 <div class="form-group">
                     <label for="nameTextField">Book Title</label>
                     <input type="text" class="form-control"
                     id="nameTextField"
                     placeholder="Enter the Book Title"
-                    name="surveyTitle" 
-                    value="<%= survey.surveyTitle %>"
+                    name="surveyName" 
+                    value="<%= survey.surveyName %>"
                     required>
                 </div>
 
@@ -36,6 +27,16 @@
                     placeholder="Enter the Book's Author"
                     name="description" 
                     value="<%= survey.description %>"
+                    required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nameTextField">Book Title</label>
+                    <input type="text" class="form-control"
+                    id="nameTextField"
+                    placeholder="Enter the Book Title"
+                    name="organization" 
+                    value="<%= survey.organization %>"
                     required>
                 </div>
 
