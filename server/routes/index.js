@@ -13,21 +13,12 @@ router.get('/home', indexController.displayHomePage);
 router.get('/login', indexController.displayLoginPage);
 
 /* GET Services page. */
-router.get('/create a survey', indexController.displaycreateCreateaSurveyPage);
+router.get('/register', indexController.displayRegisterPage);
 
 /* GET Contact Us page. */
 router.get('/about', indexController.displayAboutPage);
 
 /* GET Route for displaying the Login page */
 router.get('/contact', indexController.displayContactPage);
-
-/* GET Route for displaying the Register page */
-router.get('/register', indexController.displayRegisterPage);
-
-/* POST Route for processing the Register page */
-router.post('/register', indexController.processRegisterPage);
-
-/* GET to perform UserLogout */
-router.get('/logout', indexController.performLogout);
 
 module.exports = router;
