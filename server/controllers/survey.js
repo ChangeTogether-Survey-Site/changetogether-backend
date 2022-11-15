@@ -7,6 +7,7 @@ let jwt = require('jsonwebtoken');
 // create a reference to the model
 let Survey = require('../models/survey');
 
+
 module.exports.displaySurveyList = (req, res, next) => {
     Survey.find((err, surveyList) => {
         if(err)
@@ -17,7 +18,7 @@ module.exports.displaySurveyList = (req, res, next) => {
         {
             //console.log(BookList);
 
-            res.render('survey/list', 
+            res.json('survey/list', 
             {title: 'Surveys', 
             SurveyList: surveyList, 
             displayName: req.user ? req.user.displayName : ''});      
@@ -25,8 +26,9 @@ module.exports.displaySurveyList = (req, res, next) => {
     });
 }
 
+
 module.exports.displayAddPage = (req, res, next) => {
-    res.render('survey/add', {title: 'Add Survey', 
+    res.json('survey/add', {title: 'Add Survey', 
     displayName: req.user ? req.user.displayName : ''})          
 }
 
@@ -52,7 +54,6 @@ module.exports.processAddPage = (req, res, next) => {
     });
 
 }
-
 module.exports.displayEditPage = (req, res, next) => {
     let id = req.params.id;
 
@@ -65,7 +66,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('survey/edit', {title: 'Edit Survey', survey: surveyToEdit, 
+            res.json('survey/edit', {title: 'Edit Survey', survey: surveyToEdit, 
             displayName: req.user ? req.user.displayName : ''})
         }
     });

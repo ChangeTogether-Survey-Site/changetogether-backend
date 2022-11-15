@@ -12,30 +12,30 @@ let userModel = require('../models/user');
 let User = userModel.User; // alias
 
 module.exports.displayHomePage = (req, res, next) => {
-    res.render('index', {title: 'Home', displayName: req.user ? req.user.displayName : ''});
+    res.json('index', {title: 'Home', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayAboutPage = (req, res, next) => {
-    res.render('index', { title: 'Login', displayName: req.user ? req.user.displayName : ''});
+    res.json('index', { title: 'Login', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayProductsPage = (req, res, next) => {
-    res.render('index', { title: 'Create a Survey', displayName: req.user ? req.user.displayName : ''});
+    res.json('index', { title: 'Create a Survey', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayServicesPage = (req, res, next) => {
-    res.render('index', { title: 'About us', displayName: req.user ? req.user.displayName : ''});
+    res.json('index', { title: 'About us', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayContactPage = (req, res, next) => {
-    res.render('index', { title: 'Contact', displayName: req.user ? req.user.displayName : ''});
+    res.json('index', { title: 'Contact', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayLoginPage = (req, res, next) => {
     // check if the user is already logged in
     if(!req.user)
     {
-        res.render('auth/login', 
+        res.json('auth/login', 
         {
            title: "Login",
            messages: req.flash('loginMessage'),
@@ -99,7 +99,7 @@ module.exports.displayRegisterPage = (req, res, next) => {
     // check if the user is not already logged in
     if(!req.user)
     {
-        res.render('auth/register',
+        res.json('auth/register',
         {
             title: 'Register',
             messages: req.flash('registerMessage'),
@@ -133,7 +133,7 @@ module.exports.processRegisterPage = (req, res, next) => {
                 );
                 console.log('Error: User Already Exists!')
             }
-            return res.render('auth/register',
+            return res.json('auth/register',
             {
                 title: 'Register',
                 messages: req.flash('registerMessage'),
