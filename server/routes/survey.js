@@ -12,21 +12,24 @@ let surveyController = require('../controllers/survey');
 function requireAuth(req, res, next)
 {
     // check if the user is logged in
-    if(!req.isAuthenticated())
-    {
-        return res.redirect('/login');
-    }
+    // if(!req.isAuthenticated())
+    // {
+    //     return res.redirect('/login');
+    // }
+    console.log("authenticated");
     next();
 }
 
-/* GET Route for the Book List page - READ Operation */
+// API CALLS
+
+/* GET Route for the Surveys List - READ Operation */
 router.get('/', surveyController.displaySurveyList);
 
 /* GET Route for displaying the Add page - CREATE Operation */
-router.get('/add', requireAuth, surveyController.displayAddPage);
+//router.get('/add', requireAuth, surveyController.displayAddPage);
 
-/* POST Route for processing the Add page - CREATE Operation */
-router.post('/add', requireAuth, surveyController.processAddPage);
+/* POST Route for creating a new Survey object - CREATE Operation */
+router.post('/', surveyController.createSurvey);
 
 /* GET Route for displaying the Edit page - UPDATE Operation */
 router.get('/edit/:id', requireAuth, surveyController.displayEditPage);
@@ -35,6 +38,7 @@ router.get('/edit/:id', requireAuth, surveyController.displayEditPage);
 router.post('/edit/:id', requireAuth, surveyController.processEditPage);
 
 /* GET to perform  Deletion - DELETE Operation */
-router.get('/delete/:id', requireAuth, surveyController.performDelete);
+router.delete('/:id', surveyController.performDelete);
+
 
 module.exports = router;
