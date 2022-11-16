@@ -32,10 +32,10 @@ router.get('/', surveyController.displaySurveyList);
 router.post('/', surveyController.createSurvey);
 
 /* GET Route for displaying the Edit page - UPDATE Operation */
-router.get('/edit/:id', requireAuth, surveyController.displayEditPage);
+router.get('/edit/:id', surveyController.displayEditPage);
 
 /* POST Route for processing the Edit page - UPDATE Operation */
-router.post('/edit/:id', requireAuth, surveyController.processEditPage);
+router.post('/edit/:id', surveyController.processEditPage);
 
 /* GET to perform  Deletion - DELETE Operation */
 router.delete('/:id', surveyController.performDelete);
