@@ -6,7 +6,7 @@ let jwt = require('jsonwebtoken');
 
 let passport = require('passport');
 
-let surveyController = require('../controllers/survey');
+let surveyController = require('../controllers/survey.controller');
 
 // helper function for guard purposes
 function requireAuth(req, res, next)
@@ -40,5 +40,5 @@ router.post('/edit/:id', surveyController.processEditPage);
 /* GET to perform  Deletion - DELETE Operation */
 router.delete('/:id', surveyController.performDelete);
 
-
+33
 module.exports = router;

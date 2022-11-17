@@ -32,9 +32,12 @@ module.exports.createSurvey = (req, res, next) => {
         questions: req.body.questions
       });
       // saves data to db
-      survey.save();
-      res.status(201).json({
-        message: "Survey added successfully"
+      survey.save().then( result => {
+        console.log(`post data: ${result._id}`);
+        res.status(201).json({
+            message: "Survey added successfully",
+            surveyId: result._id
+          });
       });
 }
 
@@ -83,7 +86,7 @@ module.exports.processEditPage = (req, res, next) => {
 
 module.exports.performDelete = (req, res, next) => {
     Survey.deleteOne({ _id: req.params.id }).then(result => {
-        console.log(result);
+        console.log(`delete: ${result}`);
         res.status(200).json({ message: "Survey deleted!" });
       });
 }
