@@ -5,10 +5,10 @@ let surveyModel = mongoose.Schema({
     surveyName: String,
     description: String,
     organization: String,
-    questions: {type: Array}
-},
-{
-    collection: "surveys"
+    questions: String
+// },
+// {
+//     collection: "surveys"
 });
 
 module.exports = mongoose.model('Survey', surveyModel);
