@@ -32,9 +32,9 @@ mongoDB.once('open', ()=>{
   console.log('Connected to MongoDB...');
 });
 
-let indexRouter = require('../routes/index');
-let usersRouter = require('../routes/users');
-let surveysRouter = require('../routes/survey');
+let indexRouter = require('../routes/index.router');
+let usersRouter = require('../routes/users.router');
+let surveysRouter = require('../routes/survey.router');
 
 
 let app = express();

@@ -6,7 +6,7 @@ let jwt = require('jsonwebtoken');
 
 let passport = require('passport');
 
-let surveyController = require('../controllers/survey');
+let surveyController = require('../controllers/survey.controller');
 
 // helper function for guard purposes
 function requireAuth(req, res, next)

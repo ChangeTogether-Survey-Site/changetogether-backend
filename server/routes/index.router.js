@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let indexController = require('../controllers/index');
+let indexController = require('../controllers/index.controller');
 
 // test
 router.get('/testme', (req, res, next) => {
