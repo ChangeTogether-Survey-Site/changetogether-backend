@@ -19,10 +19,15 @@ module.exports.displaySurveyList = (req, res, next) => {
   });
 }
 
-// module.exports.displayAddPage = (req, res, next) => {
-//     res.json('survey/add', {title: 'Add Survey', 
-//     displayName: req.user ? req.user.displayName : ''})          
-// }
+module.exports.getSurveyById = (req, res, next) => {
+  Survey.findById(req.params.id).then(s => {
+    if (s) {
+      res.status(200).json(s);
+    } else {
+      res.status(404).json({ message: "Survey not found!" });
+    }
+  });
+}
 
 module.exports.createSurvey = (req, res, next) => {
     const survey = new Survey({
@@ -66,7 +71,6 @@ module.exports.updateSurvey = (req, res, next) => {
     });
 
     Survey.updateOne({ _id: req.params.id}, survey).then(result => {
-        console.log(result);
         res.status(200).json({ message: "Update was successful!" });
     });
 

@@ -23,19 +23,21 @@ function requireAuth(req, res, next)
 // API CALLS
 
 /* GET Route for the Surveys List - READ Operation */
-router.get('/surveys', surveyController.displaySurveyList);
+router.get('', surveyController.displaySurveyList);
 
 /* POST Route for creating a new Survey object - CREATE Operation */
-router.post('/surveys', surveyController.createSurvey);
+router.post('', surveyController.createSurvey);
 
-/* GET Route for displaying the Edit page - UPDATE Operation */
-router.get('/edit/:id', surveyController.displayEditPage);
+// /* GET Route for displaying the Edit page - UPDATE Operation */
+// router.get('/edit/:id', surveyController.displayEditPage);
 
 /* PUT Route for updating a survey - UPDATE Operation */
-router.put('/surveys/:id', surveyController.updateSurvey);
+router.put('/:id', surveyController.updateSurvey);
 
 /* DELETE to perform  Deletion - DELETE Operation */
-router.delete('/surveys/:id', surveyController.performDelete);
+router.delete('/:id', surveyController.performDelete);
+
+router.get('/:id', surveyController.getSurveyById);
 
 
 module.exports = router;
