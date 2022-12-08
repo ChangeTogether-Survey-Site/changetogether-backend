@@ -34,7 +34,7 @@ module.exports.createSurvey = (req, res, next) => {
       // saves data to db
       survey.save();
       res.status(201).json({
-        message: "Survey added successfully"
+        message: "Survey added successfully",
       });
 }
 
@@ -56,29 +56,42 @@ module.exports.displayEditPage = (req, res, next) => {
     });
 }
 
-module.exports.processEditPage = (req, res, next) => {
-    let id = req.params.id
-
-    let updatedSurvey = Survey({
-        "_id": id,
-        "surveyName": req.body.surveyName,
-        "description": req.body.description,
-        "organization": req.body.organization,
-        "questions": req.body.questions
+module.exports.updateSurvey = (req, res, next) => {
+    const survey = new Survey({
+      _id: req.body.id,
+      surveyName: req.body.surveyName,
+      description: req.body.description,
+      organization: req.body.organization,
+      questions: req.body.questions,
     });
 
-    Survey.updateOne({_id: id}, updatedSurvey, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh the book list
-            res.redirect('/survey-list');
-        }
+    Survey.updateOne({ _id: req.params.id}, survey).then(result => {
+        console.log(result);
+        res.status(200).json({ message: "Update was successful!" });
     });
+
+    // let id = req.params.id
+
+    // let updatedSurvey = Survey({
+    //     "_id": id,
+    //     "surveyName": req.body.surveyName,
+    //     "description": req.body.description,
+    //     "organization": req.body.organization,
+    //     "questions": req.body.questions
+    // });
+
+    // Survey.updateOne({_id: id}, updatedSurvey, (err) => {
+    //     if(err)
+    //     {
+    //         console.log(err);
+    //         res.end(err);
+    //     }
+    //     else
+    //     {
+    //         // refresh the book list
+    //         res.redirect('/survey-list');
+    //     }
+    // });
 }
 
 module.exports.performDelete = (req, res, next) => {
