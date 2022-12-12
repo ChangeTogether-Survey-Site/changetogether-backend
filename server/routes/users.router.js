@@ -6,6 +6,8 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+const checkAuth = require('../middleware/check-auth');
+
 router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -27,6 +29,7 @@ router.post("/signup", (req, res, next) => {
     });
   });
 });
+
 
 router.post("/login", (req, res, next) => {
   let currentUser;
@@ -58,6 +61,7 @@ router.post("/login", (req, res, next) => {
         return res.status(401).json({"message": "Auth has failed"});
       })
 });
+
 
 /* GET users listing. */
 router.get('/signup', function(req, res, next) {
