@@ -3,6 +3,11 @@ let router = express.Router();
 
 let indexController = require('../controllers/index.controller');
 
+// test
+router.get('/testme', (req, res, next) => {
+    
+    res.json('list', {title: 'Home', displayName: req.user ? req.user.displayName : ''});
+});
 
 /* GET home page. */
 router.get('/', indexController.displayHomePage);

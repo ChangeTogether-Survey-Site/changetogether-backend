@@ -7,6 +7,7 @@ let jwt = require('jsonwebtoken');
 let passport = require('passport');
 
 let surveyController = require('../controllers/survey.controller');
+const checkAuth = require('../middleware/check-auth');
 
 // helper function for guard purposes
 function requireAuth(req, res, next)
@@ -23,22 +24,20 @@ function requireAuth(req, res, next)
 // API CALLS
 
 /* GET Route for the Surveys List - READ Operation */
-router.get('/', surveyController.displaySurveyList);
-
-/* GET Route for displaying the Add page - CREATE Operation */
-//router.get('/add', requireAuth, surveyController.displayAddPage);
+router.get('', surveyController.displaySurveyList);
 
 /* POST Route for creating a new Survey object - CREATE Operation */
-router.post('/', surveyController.createSurvey);
+router.post('', checkAuth, surveyController.createSurvey);
 
-/* GET Route for displaying the Edit page - UPDATE Operation */
-router.get('/edit/:id', surveyController.displayEditPage);
+// /* GET Route for displaying the Edit page - UPDATE Operation */
+// router.get('/edit/:id', surveyController.displayEditPage);
 
-/* POST Route for processing the Edit page - UPDATE Operation */
-router.post('/edit/:id', surveyController.processEditPage);
+/* PUT Route for updating a survey - UPDATE Operation */
+router.put('/:id', checkAuth, surveyController.updateSurvey);
 
-/* GET to perform  Deletion - DELETE Operation */
-router.delete('/:id', surveyController.performDelete);
+/* DELETE to perform  Deletion - DELETE Operation */
+router.delete('/:id', checkAuth, surveyController.performDelete);
 
-33
+router.get('/:id', surveyController.getSurveyById);
+
 module.exports = router;
