@@ -19,10 +19,15 @@ module.exports.displaySurveyList = (req, res, next) => {
   });
 }
 
-// module.exports.displayAddPage = (req, res, next) => {
-//     res.json('survey/add', {title: 'Add Survey', 
-//     displayName: req.user ? req.user.displayName : ''})          
-// }
+module.exports.getSurveyById = (req, res, next) => {
+  Survey.findById(req.params.id).then(s => {
+    if (s) {
+      res.status(200).json(s);
+    } else {
+      res.status(404).json({ message: "Survey not found!" });
+    }
+  });
+}
 
 module.exports.createSurvey = (req, res, next) => {
     const survey = new Survey({
@@ -32,12 +37,9 @@ module.exports.createSurvey = (req, res, next) => {
         questions: req.body.questions
       });
       // saves data to db
-      survey.save().then( result => {
-        console.log(`post data: ${result._id}`);
-        res.status(201).json({
-            message: "Survey added successfully",
-            surveyId: result._id
-          });
+      survey.save();
+      res.status(201).json({
+        message: "Survey added successfully",
       });
 }
 
@@ -59,34 +61,46 @@ module.exports.displayEditPage = (req, res, next) => {
     });
 }
 
-module.exports.processEditPage = (req, res, next) => {
-    let id = req.params.id
-
-    let updatedSurvey = Survey({
-        "_id": id,
-        "surveyName": req.body.surveyName,
-        "description": req.body.description,
-        "organization": req.body.organization,
-        "questions": req.body.questions
+module.exports.updateSurvey = (req, res, next) => {
+    const survey = new Survey({
+      _id: req.body.id,
+      surveyName: req.body.surveyName,
+      description: req.body.description,
+      organization: req.body.organization,
+      questions: req.body.questions,
     });
 
-    Survey.updateOne({_id: id}, updatedSurvey, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh the book list
-            res.redirect('/survey-list');
-        }
+    Survey.updateOne({ _id: req.params.id}, survey).then(result => {
+        res.status(200).json({ message: "Update was successful!" });
     });
+
+    // let id = req.params.id
+
+    // let updatedSurvey = Survey({
+    //     "_id": id,
+    //     "surveyName": req.body.surveyName,
+    //     "description": req.body.description,
+    //     "organization": req.body.organization,
+    //     "questions": req.body.questions
+    // });
+
+    // Survey.updateOne({_id: id}, updatedSurvey, (err) => {
+    //     if(err)
+    //     {
+    //         console.log(err);
+    //         res.end(err);
+    //     }
+    //     else
+    //     {
+    //         // refresh the book list
+    //         res.redirect('/survey-list');
+    //     }
+    // });
 }
 
 module.exports.performDelete = (req, res, next) => {
     Survey.deleteOne({ _id: req.params.id }).then(result => {
-        console.log(`delete: ${result}`);
+        console.log(result);
         res.status(200).json({ message: "Survey deleted!" });
       });
 }

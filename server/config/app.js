@@ -71,12 +71,6 @@ app.use(passport.session());
 let userModel = require('../models/user');
 let User = userModel.User;
 
-// implement a User Authentication Strategy
-passport.use(User.createStrategy());
-
-// serialize and deserialize the User info
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
@@ -96,23 +90,9 @@ passport.use(strategy);
 
 // routing
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/api/surveys', surveysRouter);
+app.use('/api/user', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.json('error', { title: 'Error'});
-});
 
 module.exports = app;
