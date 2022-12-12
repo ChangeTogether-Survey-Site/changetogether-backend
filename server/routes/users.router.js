@@ -29,23 +29,32 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  let currentUser;
   // validate if email exists
-  User.find({ email: req.body.email })
+  User.findOne({ email: req.body.email })
     .then(user=> {
+      // console.log("user: " + user);
       if (!user){
         // if user does not exist
         return res.status(401).json({"message": "Auth has failed"});
       } // end if
       // user exists, validation of pass
-      bcrypt.compare(req.body.password, user.password);
+      currentUser = user; // saves fecthed user to pass it down to the next then
+      return bcrypt.compare(req.body.password, user.password);;
     })
-      .then(res => {
-        if (!res){
+      .then(result => {
+        //console.log("result: " + result.comparison + " currentUser: " + result.currentUser);
+        if (!result){
           return res.status(401).json({"message": "Auth has failed"});
         }
         // correct pass comparison (JWT)
-        const token = jwt.sign( { email: user.email, userId: user._id }, 'Chewbacca', { expiresIn: "1h" } );
+        const token = jwt.sign( { email: currentUser.email, userId: currentUser._id }, 'Chewbacca', { expiresIn: "1h" } );
+        console.log("token: " + token);
+        res.status(200).json({ 
+          token: token
+         });
       }).catch(err => {
+        console.log("err: " + err);
         return res.status(401).json({"message": "Auth has failed"});
       })
 });
