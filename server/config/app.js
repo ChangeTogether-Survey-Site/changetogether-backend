@@ -90,7 +90,7 @@ passport.use(strategy);
 
 // routing
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/api/surveys', surveysRouter);
 app.use('/api/user', usersRouter);
 
