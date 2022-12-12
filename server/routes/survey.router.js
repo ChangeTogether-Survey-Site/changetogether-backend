@@ -40,5 +40,4 @@ router.delete('/:id', checkAuth, surveyController.performDelete);
 
 router.get('/:id', surveyController.getSurveyById);
 
-
 module.exports = router;
