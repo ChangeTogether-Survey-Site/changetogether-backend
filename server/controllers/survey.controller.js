@@ -47,19 +47,19 @@ module.exports.createSurvey = (req, res, next) => {
 module.exports.displayEditPage = (req, res, next) => {
   let id = req.params.id;
 
-  Survey.findById(id, (err, surveyToEdit) => {
-    if (err) {
-      console.log(err);
-      res.end(err);
-    } else {
-      //show the edit view
-      res.json("survey/edit", {
-        title: "Edit Survey",
-        survey: surveyToEdit,
-        displayName: req.user ? req.user.displayName : "",
-      });
-    }
-  });
+  // Survey.findById(id, (err, surveyToEdit) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.end(err);
+  //   } else {
+  //     //show the edit view
+  //     res.json("survey/edit", {
+  //       title: "Edit Survey",
+  //       survey: surveyToEdit,
+  //       displayName: req.user ? req.user.displayName : "",
+  //     });
+  //   }
+  // });
 };
 
 module.exports.updateSurvey = (req, res, next) => {
@@ -69,6 +69,7 @@ module.exports.updateSurvey = (req, res, next) => {
     description: req.body.description,
     organization: req.body.organization,
     questions: req.body.questions,
+    creator: req.userData.userId,
   });
 
   Survey.updateOne(
